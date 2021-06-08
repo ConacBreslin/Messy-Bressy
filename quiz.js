@@ -5,10 +5,10 @@ let score = 0;
 let availableQuesions = [];
 let maxQuestions = 10;
 let phobia = document.getElementById("phobia");
-let optionA = document.getElementById("optionA");
-let optionB = document.getElementById("optionB");
-let optionC = document.getElementById("optionC");
-let optionD = document.getElementById("optionD");
+let optionA = document.getElementById("A");
+let optionB = document.getElementById("B");
+let optionC = document.getElementById("C");
+let optionD = document.getElementById("D");
 
 
 
