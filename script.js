@@ -1,9 +1,14 @@
-//get peron to selection number of questions wanted
-let displayQuestionNumbers = getElementById("displayQuestionNumbers");
+let displayQuestionNumbers = document.getElementById("displayQuestionNumbers");
+console.log(displayQuestionNumbers);
 displayQuestionNumbers.addEventListener("click", displayQuestionsWanted);
-let questionsWanted = getElementsByClassName("questionsWanted");
-console.log(questionsWanted);
+let questionsWanted = document.getElementsByClassName("questionsWanted");
 
 function displayQuestionsWanted(){
-    questionsWanted.classList.remove("d-none");
+    for (let i of questionsWanted){
+        console.log("displayQuestionsWanted clicked")
+    i.classList.remove("d-none");
+ 
+    console.log(true) 
 }
+    }
+ 
