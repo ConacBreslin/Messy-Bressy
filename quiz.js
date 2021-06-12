@@ -8,6 +8,11 @@ let options = document.getElementsByClassName("option");
 let playerPickNumber = document.getElementById("playerPickNumber");
 let pickMax = document.getElementById("pickMax");
 let form = document.getElementById("pickForm");
+let quizToAppear = document.getElementById("quizToAppear");
+let hudQuestion = document.getElementById("hudQuestion");
+let hudScore = document.getElementById("hudScore");
+let progressBarFull = document.getElementById("progressBarFull")
+
 
 var correctAnswer;
 let currentQuestionNumber = 0;
@@ -18,7 +23,7 @@ let TIMER;
 let questionTime = 10;
 let gaugeWidth = 150;
 let gaugeUnit = gaugeWidth / questionTime;
-let classToApply = "incorrect"
+let classToApply;
 
 // set maximum number of questions
 pickMax.addEventListener("click", setMaxNumber);
@@ -42,23 +47,23 @@ function renderQuestion() {
         return window.location.assign('/end.html')
     }
     currentQuestionNumber++;
+    hudQuestion.innerText = `Question: ${currentQuestionNumber}/${maxQuestions}`;
+    //UpdateProgressBar
+    progressBarFull.style.width = `${(currentQuestionNumber/maxQuestions) * 100}%`;
+    
     let questionIndex = Math.floor(Math.random() * availableQuestions.length); // create a random number based on number of questions available
-
     currentQuestion = availableQuestions[questionIndex];
-
     phobia.innerHTML = `<p>${currentQuestion.phobia} is the fear of ...</p>`; // set phobia to be guessed
     optionA.innerHTML = `<p>${currentQuestion.choiceA.icon}</p><p>${currentQuestion.choiceA.name}</p>`
-
     optionB.innerHTML = `<p>${currentQuestion.choiceB.icon}</p><p>${currentQuestion.choiceB.name}</p>`
-
     optionC.innerHTML = `<p>${currentQuestion.choiceC.icon}</p><p>${currentQuestion.choiceC.name}</p>`
-
     optionD.innerHTML = `<p>${currentQuestion.choiceD.icon}</p><p>${currentQuestion.choiceD.name}</p>`
     // sets four different options 
     correctAnswer = currentQuestion.correct
     availableQuestions.splice(questionIndex, 1); //remove question used from available question array
-
     addEventListenersToOptions();
+    
+    
 }
 
 
@@ -73,9 +78,9 @@ function checkAnswer(event) {
     let targetElement = event.currentTarget;
     console.log({correctAnswer});
     console.log(targetValue);
-   
-    if (targetValue === correctAnswer) {
+     if (targetValue === correctAnswer) {
         score++;
+        hudScore.innerText = `${score}`;
         classToApply = "correct";
         targetElement.classList.add(classToApply);
         setTimeout(function(event){ targetElement.classList.remove(classToApply); renderQuestion();}, 1000)
@@ -83,10 +88,8 @@ function checkAnswer(event) {
         classToApply = "incorrect";
         targetElement.classList.add(classToApply);
         setTimeout(function(event){ targetElement.classList.remove(classToApply); renderQuestion(); }, 1000)
-            
     } 
     }
-
 
 
 function renderCounter() {
@@ -102,21 +105,6 @@ function renderCounter() {
 
 
 
-//code to check answer
-/*
-function checkAnswer(answer) {
-    if (answer === question[currentQuestionNumber].correct) {
-        score++
-    }
-    count = 10;
-    if (currentQuestionNumber < maxQuestions) {
-        runningQuestion++;
-        renderQuestion()
-    } else
-        clearInterval(TIMER);
-    renderFinalResult();
-}
-*/
 
 
 
