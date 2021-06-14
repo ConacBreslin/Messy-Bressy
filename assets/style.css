@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Metrophobic&display=swap');
+
+
+body {
+    font-family: "Metrophobic", sans-serif;
+    background-color: #e6f2ff;
+    color: #001a4d;
+    font-size: 2rem;
+}
+
+.correct {
+ background-color: green;
+}
+
+.incorrect {
+    background-color: red;
+}
+
+#progressBar {
+    width: 20rem;
+    height: 2.5rem;
+    border: 0.3rem solid #1a1b41;
+    
+}
+#progressBarFull {
+    height: 1.9rem;
+    background-color: #1a1b41;
+        width: 10%;
+   
+}
