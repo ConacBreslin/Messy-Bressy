@@ -18,45 +18,45 @@
 </head>
 
 <body>
-    <div class="container-fluid text-container">
+    <div class="container text-container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1>Face Your Fears</h1>
+                <h1>Face your Fears <img src="assets/images/logo.png" alt="logo" id="logo"></h1>
             </div>
             <div class="col-12 text-center">
                 <form id="pickForm">
                     <label for="playerPickNumber">How Many Questions would you like?</label>
                     <input type="number" id="playerPickNumber" min="1" max="20" required />
-                    <button id="pickMax" class="btn btn-success">Go!</button>
+                    <button id="pickMax" class="btn">Go!</button>
                     <span>(Max 20)</span>
                 </form>
             </div>
         </div>
         <div id="quizArea" class="d-none">
             <div class="row">
-                <div class="col-6">
+                <div class="col-6 text-start">
                     <p id="hudQuestion"></p>
-                    <div id="progressBar">
+                    <div class="d-none d-md-block" id="progressBar">
                         <div id="progressBarFull"></div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <p>Score:</p>
-                    <p id="hudScore"></p>
+                <div class="col-6 text-start">
+                    <p id="hudScore">Score: 0</p>
                 </div>
                 <div class="col-12" id="questionArea">
-                    <p><span id="phobia"></span> is the fear of ...</p>
+
                 </div>
-                <div class="col-3 text-center option" id="A">
+                <div class="col-4 offset-2 col-md-2 offset-md-2 text-center option" id="A">
                 </div>
-                <div class="col-3 text-center option" id="B">
+                <div class="col-4 col-md-2 text-center option" id="B">
                 </div>
-                <div class="col-3 text-center option" id="C">
+                <div class="col-4 offset-2 col-md-2  text-center option" id="C">
                 </div>
-                <div class="col-3 text-center option" id="D">
+                <div class="col-4 col-md-2 text-center option" id="D">
+                </div>
+                <div class="col-12 text-center" id="correctAnswerWas">
                 </div>
                 <div class="col-12 text-center" id="timeRemainingArea">
-                    <p>holdertexttimeArea</p>
                 </div>
             </div>
         </div>
@@ -66,6 +66,7 @@
     </script>
     <script src="questions.js"></script>
     <script src="quiz.js"></script>
+
 </body>
 
 </html>

@@ -13,6 +13,7 @@ let hudScore = document.getElementById("hudScore");
 let progressBarFull = document.getElementById("progressBarFull");
 let quizArea = document.getElementById("quizArea");
 
+
 var correctAnswer;
 let currentQuestionNumber = 0;
 let currentQuestion;
@@ -20,24 +21,30 @@ let score = 0;
 let availableQuesions = [];
 let maxQuestions;
 let classToApply;
-let count = 15;
-let questionTime = 15;
+let count = 10;
+let questionTime = 10;
 let timer;
 
 // set maximum number of questions
+
 
 pickMax.addEventListener("click", setMaxNumber);
 
 function setMaxNumber(event) {
     event.preventDefault();
     maxQuestions = playerPickNumber.value;
-    if (maxQuestions <= 20) {
+    if (maxQuestions <= 20 && maxQuestions > 0) {
         pickForm.classList.add("d-none");
         quizArea.classList.remove("d-none");
-            } else {
+        startQuiz();
+    } else {
         alert("You must pick a number between 1 and 20");
+        playerPickNumber.value = '';
     }
+  
 }
+
+
 //add event listeners to Options
 
 addEventListenersToOptions();
@@ -45,24 +52,26 @@ addEventListenersToOptions();
 function addEventListenersToOptions() {
     for (let i of options) {
         i.addEventListener('click', checkAnswer);
+
     }
+
 }
 
 // function to display question and options,increase current question number and update progressbar in hud, 
 
 function renderQuestion() {
     if (currentQuestionNumber >= maxQuestions) {
-        console.log(score);
+        localStorage.setItem("maxQuestions", maxQuestions)
         localStorage.setItem("finalScore", score);
-        localStorage.setItem("maxQuestions", maxQuestions);
         //go to finalscore page
-        return window.location.assign('/finalscore.html');
+        return window.location.assign('finalscore.html');
     }
     count = questionTime;
     currentQuestionNumber++;
+
     hudQuestion.innerText = `Question ${currentQuestionNumber} of ${maxQuestions}`;
     //UpdateProgressBar
-    progressBarFull.style.width = `${(currentQuestionNumber/maxQuestions) * 100}%`;
+    progressBarFull.style.width = `${(currentQuestionNumber / maxQuestions) * 100}%`;
     let questionIndex = Math.floor(Math.random() * availableQuestions.length); // create a random number based on number of questions available
     currentQuestion = availableQuestions[questionIndex];
     phobia.innerHTML = `<p>${currentQuestion.phobia} is the fear of ...</p>`; // set phobia to be guessed
@@ -91,7 +100,7 @@ function checkAnswer(event) {
     let targetElement = event.currentTarget;
     if (targetValue === correctAnswer) {
         score++;
-        hudScore.innerText = `${score}`;
+        hudScore.innerHTML = `<p>Score: ${score}</p>`;
         classToApply = "correct";
         targetElement.classList.add(classToApply);
         setTimeout(function (event) {
@@ -101,7 +110,7 @@ function checkAnswer(event) {
     } else {
         classToApply = "incorrect";
         targetElement.classList.add(classToApply);
-        setTimeout(function (event) {
+               setTimeout(function (event) {
             targetElement.classList.remove(classToApply);
             renderQuestion();
         }, 1000);
@@ -117,11 +126,7 @@ function startQuiz() {
     availableQuestions = [...questions];
     // display question and options and increase current question number
     renderQuestion();
-    // renderCounter(); // display time remaining for each question
-  
     // call renderTimeRemaining every second
-    timer = setInterval(renderTimeRemaining, 1000); 
-   
-}
+    timer = setInterval(renderTimeRemaining, 1000);
 
-startQuiz();
+}
